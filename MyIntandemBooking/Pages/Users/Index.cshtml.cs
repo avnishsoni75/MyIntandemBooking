@@ -8,34 +8,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MyIntandemBooking.Areas.Identity.Data;
+using MyIntandemBooking.Authorization;
 using MyIntandemBooking.Models;
 
-namespace MyIntandemBooking.Pages.Events
+namespace MyIntandemBooking.Pages.Users
 {
-    [AllowAnonymous]
+    [Authorize(Roles = Constants.AdministratorsRole)]
     public class IndexModel : PageModel
     {
         private readonly MyInTandemBookingContext _context;
-        private readonly IAuthorizationService _authorizationService;
         private readonly UserManager<MyInTandemBookingUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public IndexModel(MyInTandemBookingContext context, 
-            IAuthorizationService authorizationService,
-            UserManager<MyInTandemBookingUser> userManager)
+        public IndexModel(MyInTandemBookingContext context,
+            UserManager<MyInTandemBookingUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _roleManager = roleManager;
             _userManager = userManager;
-            _authorizationService = authorizationService;
         }
 
-        public IList<Event> Events { get;set; }
+        public IList<MyInTandemBookingUser> Users { get; set; }
 
         public async Task OnGetAsync()
         {
-            Events = await _context.Event
-                .Include(x => x.ManagerAssignments)
-                .ThenInclude(x => x.User)
-                .ToListAsync();
+            Users = await _userManager.Users.ToListAsync();
         }
     }
 }

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyIntandemBooking.Areas.Identity.Data;
+using MyIntandemBooking.Authorization;
 using MyIntandemBooking.Models;
 
 namespace MyIntandemBooking
@@ -52,6 +53,10 @@ namespace MyIntandemBooking
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
+            //services.AddSingleton<IAuthorizationHandler, AdministratorsAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

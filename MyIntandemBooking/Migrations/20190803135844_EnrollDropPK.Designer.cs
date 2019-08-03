@@ -10,14 +10,14 @@ using MyIntandemBooking.Models;
 namespace MyIntandemBooking.Migrations
 {
     [DbContext(typeof(MyInTandemBookingContext))]
-    [Migration("20190731212407_initial")]
-    partial class initial
+    [Migration("20190803135844_EnrollDropPK")]
+    partial class EnrollDropPK
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -145,6 +145,8 @@ namespace MyIntandemBooking.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime>("DOB");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -153,6 +155,8 @@ namespace MyIntandemBooking.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -184,6 +188,51 @@ namespace MyIntandemBooking.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("MyIntandemBooking.Models.Enrollment", b =>
+                {
+                    b.Property<string>("UserID");
+
+                    b.Property<int>("EventID");
+
+                    b.HasKey("UserID", "EventID");
+
+                    b.HasIndex("EventID");
+
+                    b.ToTable("Enrollment");
+                });
+
+            modelBuilder.Entity("MyIntandemBooking.Models.Event", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("MyIntandemBooking.Models.ManagerAssignment", b =>
+                {
+                    b.Property<string>("UserID");
+
+                    b.Property<int>("EventID");
+
+                    b.HasKey("UserID", "EventID");
+
+                    b.HasIndex("EventID");
+
+                    b.ToTable("ManagerAssignment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -228,6 +277,32 @@ namespace MyIntandemBooking.Migrations
                     b.HasOne("MyIntandemBooking.Areas.Identity.Data.MyInTandemBookingUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MyIntandemBooking.Models.Enrollment", b =>
+                {
+                    b.HasOne("MyIntandemBooking.Models.Event", "Event")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("EventID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyIntandemBooking.Areas.Identity.Data.MyInTandemBookingUser", "User")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MyIntandemBooking.Models.ManagerAssignment", b =>
+                {
+                    b.HasOne("MyIntandemBooking.Models.Event", "Event")
+                        .WithMany("ManagerAssignments")
+                        .HasForeignKey("EventID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyIntandemBooking.Areas.Identity.Data.MyInTandemBookingUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -22,7 +22,10 @@ namespace MyIntandemBooking.Pages.Events
 
         public async Task OnGetAsync()
         {
-            Events = await _context.Event.ToListAsync();
+            Events = await _context.Event
+                .Include(x => x.ManagerAssignments)
+                .ThenInclude(x => x.User)
+                .ToListAsync();
         }
     }
 }

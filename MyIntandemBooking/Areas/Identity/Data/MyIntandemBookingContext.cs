@@ -17,9 +17,12 @@ namespace MyIntandemBooking.Models
 
             builder.Entity<Enrollment>()
                 .HasKey(t => new { t.UserID, t.EventID });
+            builder.Entity<ManagerAssignment>()
+                .HasKey(t => new { t.UserID, t.EventID });
         }
 
         public DbSet<Event> Event { get; set; }
         public DbSet<Enrollment> Enrollment { get; set; }
+        public DbSet<ManagerAssignment> ManagerAssignment { get; set; }
     }
 }

@@ -30,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Events[0].Location)
             </th>
+            <th>
+                Manager(s)
+            </th>
             <th></th>
             <th></th>
             <th></th>
@@ -42,38 +45,45 @@
     <tbody>
         @foreach (var item in Model.Events)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
-                </td>
-                <td>
-                    <a class="btn btn-info btn-sm" asp-page="./Details" asp-route-id="@item.ID">Details</a>
-                </td>
-                <td>
-                    <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <td>
-
-                        <form id="registerForm" asp-page="./Register" asp-route-id=@item.ID>
-                            <button id="register" type="submit" class="btn btn-success btn-sm">Register</button>
-                        </form>
-                    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @{ 
+                    var managersList = item.ManagerAssignments.Select(x => x.User.Name);
+                    var managers = string.Join(", ", managersList);
                 }
-            </tr>
+                @managers
+            </td>
+            <td>
+                <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-info btn-sm" asp-page="./Details" asp-route-id="@item.ID">Details</a>
+            </td>
+            <td>
+                <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+
+                    <form id="registerForm" asp-page="./Register" asp-route-id=@item.ID>
+                        <button id="register" type="submit" class="btn btn-success btn-sm">Register</button>
+                    </form>
+                </td>
+            }
+        </tr>
         }
     </tbody>
 </table>

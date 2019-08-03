@@ -1,9 +1,10 @@
 ﻿using MyIntandemBooking.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyIntandemBooking.Models
 {
-    public class Enrollment
+    public class ManagerAssignment
     {
         [ForeignKey("MyInTandemBookingUser")]
         public string UserID { get; set; }

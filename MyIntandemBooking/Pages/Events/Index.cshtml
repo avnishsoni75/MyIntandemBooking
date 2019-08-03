@@ -1,0 +1,79 @@
+﻿@page
+@model MyIntandemBooking.Pages.Events.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using MyIntandemBooking.Areas.Identity.Data
+@inject SignInManager<MyInTandemBookingUser> SignInManager
+@inject UserManager<MyInTandemBookingUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Events</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Location)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Events)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-page="./Details" asp-route-id="@item.ID">Details</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+
+                        <form id="registerForm" asp-page="./Register" asp-route-id=@item.ID>
+                            <button id="register" type="submit" class="btn btn-success btn-sm">Register</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

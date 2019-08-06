@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Users[0].DOB)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Roles)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +35,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles)
                 </td>
             </tr>
         }

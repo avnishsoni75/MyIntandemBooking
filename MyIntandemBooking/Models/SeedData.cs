@@ -26,12 +26,16 @@ namespace MyIntandemBooking.Models
                 await EnsureRole(serviceProvider, adminID.Id, Constants.AdministratorsRole);
 
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "Manager", "manager@intandembike.org");
-                await EnsureRole(serviceProvider, managerID.Id, Constants.ManagersRole);
 
                 var captainID = await EnsureUser(serviceProvider, testUserPw, "Captain", "captain@intandembike.org");
+                await EnsureRole(serviceProvider, managerID.Id, Constants.CaptainsRole);
+
                 var stokerID = await EnsureUser(serviceProvider, testUserPw, "Stoker", "stoker@intandembike.org");
+                await EnsureRole(serviceProvider, managerID.Id, Constants.StokersRole);
 
                 var volID = await EnsureUser(serviceProvider, testUserPw, "Volunteer", "volunteer@intandembike.org");
+                await EnsureRole(serviceProvider, managerID.Id, Constants.VolunteersRole);
+
 
                 if (!context.Event.Any())
                 {

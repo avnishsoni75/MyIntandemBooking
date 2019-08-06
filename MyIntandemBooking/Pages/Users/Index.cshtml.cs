@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -28,11 +29,30 @@ namespace MyIntandemBooking.Pages.Users
             _userManager = userManager;
         }
 
-        public IList<MyInTandemBookingUser> Users { get; set; }
+        public class UserViewModel
+        {
+            public string Name { get; set; }
+            public DateTime DOB { get; set; }
+            public string Email { get; set; }
+            [Display(Name = "Role(s)")]
+            public string Roles { get; set; }
+        }
+
+        [BindProperty]
+        public IList<UserViewModel> Users { get; set; }
 
         public async Task OnGetAsync()
         {
-            Users = await _userManager.Users.ToListAsync();
+            var users = from user in await _userManager.Users.ToListAsync()
+                        select new UserViewModel
+                        {
+                            Name = user.Name,
+                            DOB = user.DOB,
+                            Email = user.Email,
+                            Roles = string.Join(',', _userManager.GetRolesAsync(user).Result)
+                        };
+
+            Users = users.ToList();
         }
     }
 }

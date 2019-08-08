@@ -58,19 +58,11 @@ namespace MyIntandemBooking.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DateTime = table.Column<DateTime>(nullable: false),
-                    Location = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
-                    EventID = table.Column<int>(nullable: true)
+                    Location = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Event", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Event_Event_EventID",
-                        column: x => x.EventID,
-                        principalTable: "Event",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,8 +176,7 @@ namespace MyIntandemBooking.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<string>(nullable: false),
-                    EventID = table.Column<int>(nullable: false),
-                    ID = table.Column<int>(nullable: false)
+                    EventID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,6 +189,30 @@ namespace MyIntandemBooking.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Enrollment_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ManagerAssignment",
+                columns: table => new
+                {
+                    UserID = table.Column<string>(nullable: false),
+                    EventID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ManagerAssignment", x => new { x.UserID, x.EventID });
+                    table.ForeignKey(
+                        name: "FK_ManagerAssignment_Event_EventID",
+                        column: x => x.EventID,
+                        principalTable: "Event",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ManagerAssignment_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -249,8 +264,8 @@ namespace MyIntandemBooking.Migrations
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_EventID",
-                table: "Event",
+                name: "IX_ManagerAssignment_EventID",
+                table: "ManagerAssignment",
                 column: "EventID");
         }
 
@@ -273,6 +288,9 @@ namespace MyIntandemBooking.Migrations
 
             migrationBuilder.DropTable(
                 name: "Enrollment");
+
+            migrationBuilder.DropTable(
+                name: "ManagerAssignment");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MyIntandemBooking.Areas.Identity.Data;
 using MyIntandemBooking.Authorization;
 using MyIntandemBooking.Models;
+using MyIntandemBooking.Services;
 
 namespace MyIntandemBooking
 {
@@ -57,6 +58,8 @@ namespace MyIntandemBooking
             services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
             //services.AddSingleton<IAuthorizationHandler, AdministratorsAuthorizationHandler>();
+
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

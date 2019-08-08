@@ -10,8 +10,8 @@ using MyIntandemBooking.Models;
 namespace MyIntandemBooking.Migrations
 {
     [DbContext(typeof(MyInTandemBookingContext))]
-    [Migration("20190803053948_ManagerAssignment")]
-    partial class ManagerAssignment
+    [Migration("20190808013752_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,8 +196,6 @@ namespace MyIntandemBooking.Migrations
 
                     b.Property<int>("EventID");
 
-                    b.Property<int>("ID");
-
                     b.HasKey("UserID", "EventID");
 
                     b.HasIndex("EventID");
@@ -229,8 +227,6 @@ namespace MyIntandemBooking.Migrations
                     b.Property<string>("UserID");
 
                     b.Property<int>("EventID");
-
-                    b.Property<int>("ID");
 
                     b.HasKey("UserID", "EventID");
 

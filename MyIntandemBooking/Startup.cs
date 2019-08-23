@@ -47,6 +47,11 @@ namespace MyIntandemBooking
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MyInTandemBookingContext>();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            services.AddMemoryCache();
+            
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -86,6 +91,7 @@ namespace MyIntandemBooking
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseCookiePolicy();
             app.UseAuthentication();
 

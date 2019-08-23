@@ -29,5 +29,6 @@ namespace MyIntandemBooking.Models
         public DbSet<Event> Event { get; set; }
         public DbSet<Enrollment> Enrollment { get; set; }
         public DbSet<ManagerAssignment> ManagerAssignment { get; set; }
+        public DbSet<WizardUser> WizardUser { get; set; }
     }
 }

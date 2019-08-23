@@ -1,0 +1,30 @@
+﻿@page
+@model MyIntandemBooking.Pages.Wizard.CreateWizardUser3Model
+
+@{
+    ViewData["Title"] = "CreateWizardUser3";
+}
+
+<h1>Create Wizard User Step 3</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Wizard3.AgreeToTerms" class="control-label"></label>
+                <input asp-for="Wizard3.AgreeToTerms" class="form-control" />
+                <span asp-validation-for="Wizard3.AgreeToTerms" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Previous" class="btn btn-warning" asp-route-btn="previous" />
+                <input type="submit" value="Submit" class="btn btn-success" asp-route-btn="submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

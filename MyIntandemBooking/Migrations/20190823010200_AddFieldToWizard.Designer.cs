@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyIntandemBooking.Models;
 
 namespace MyIntandemBooking.Migrations
 {
     [DbContext(typeof(MyInTandemBookingContext))]
-    partial class MyInTandemBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20190823010200_AddFieldToWizard")]
+    partial class AddFieldToWizard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

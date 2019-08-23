@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyIntandemBooking", "MyIntandemBooking\MyIntandemBooking.csproj", "{B49138C0-F57F-432F-A373-2B0108364317}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyIntandemBooking", "MyIntandemBooking\MyIntandemBooking.csproj", "{B49138C0-F57F-432F-A373-2B0108364317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyInTandemBooking.Tests", "MyInTandemBooking.Tests\MyInTandemBooking.Tests.csproj", "{5F0F2FD0-E0EA-49D5-BB5F-5A8CD2597AC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B49138C0-F57F-432F-A373-2B0108364317}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B49138C0-F57F-432F-A373-2B0108364317}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B49138C0-F57F-432F-A373-2B0108364317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0F2FD0-E0EA-49D5-BB5F-5A8CD2597AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0F2FD0-E0EA-49D5-BB5F-5A8CD2597AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0F2FD0-E0EA-49D5-BB5F-5A8CD2597AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0F2FD0-E0EA-49D5-BB5F-5A8CD2597AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

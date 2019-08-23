@@ -1,0 +1,48 @@
+﻿@page
+@model MyIntandemBooking.Pages.Wizard.CreateWizardUser1Model
+
+@{
+    ViewData["Title"] = "CreateWizardUser1";
+}
+
+<h1>Create Wizard User Step 1</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Wizard1.Name" class="control-label"></label>
+                <input asp-for="Wizard1.Name" class="form-control" />
+                <span asp-validation-for="Wizard1.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wizard1.AddressLine1" class="control-label"></label>
+                <input asp-for="Wizard1.AddressLine1" class="form-control" />
+                <span asp-validation-for="Wizard1.AddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wizard1.AddressLine2" class="control-label"></label>
+                <input asp-for="Wizard1.AddressLine2" class="form-control" />
+                <span asp-validation-for="Wizard1.AddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wizard1.City" class="control-label"></label>
+                <input asp-for="Wizard1.City" class="form-control" />
+                <span asp-validation-for="Wizard1.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wizard1.NumOfYearsAtAddress" class="control-label"></label>
+                <input asp-for="Wizard1.NumOfYearsAtAddress" class="form-control" />
+                <span asp-validation-for="Wizard1.NumOfYearsAtAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" asp-route-btn="next" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
